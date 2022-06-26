@@ -352,6 +352,13 @@ extension POIViewController {
             let nodeCount = "\(sceneLocationView.sceneNode?.childNodes.count.description ?? "n/a") ARKit Nodes"
             infoLabel.text!.append(" \(hour.short):\(minute.short):\(second.short):\(nanosecond.short3) • \(nodeCount)")
         }
+	
+	//현재 위치 gps 정보 나오게
+        if let latitude = sceneLocationView.sceneLocationManager.currentLocation?.coordinate.latitude,
+           let longitude = sceneLocationView.sceneLocationManager.currentLocation?.coordinate.longitude
+        {
+            infoLabel.text!.append (" / GPS : \(latitude), \(longitude)")
+        }	    
     }
 
     func buildNode(latitude: CLLocationDegrees, longitude: CLLocationDegrees,
