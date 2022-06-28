@@ -231,11 +231,13 @@ extension POIViewController {
             }
         } else {
             // 3. If not, then show the
-            buildDemoData().forEach {
-                sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: $0)
-            }
+            //buildDemoData().forEach {
+            //    sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: $0)
+            //}
         }
 
+        let ptQtower = buildViewNode(latitude: 37.04771237, longitude: 127.0459399, altitude: 30.9510, text: "NOW! KimSejun")
+        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: ptQtower)
         // There are many different ways to add lighting to a scene, but even this mechanism (the absolute simplest)
         // keeps 3D objects fron looking flat
         sceneLocationView.autoenablesDefaultLighting = true
@@ -247,7 +249,7 @@ extension POIViewController {
     /// - Returns: an array of annotation nodes.
     func buildDemoData() -> [LocationAnnotationNode] {
         var nodes: [LocationAnnotationNode] = []
-
+        
         let spaceNeedle = buildNode(latitude: 47.6205, longitude: -122.3493, altitude: 225, imageName: "pin")
         nodes.append(spaceNeedle)
 
@@ -376,7 +378,7 @@ extension POIViewController {
                        altitude: CLLocationDistance, text: String) -> LocationAnnotationNode {
         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let location = CLLocation(coordinate: coordinate, altitude: altitude)
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
         label.text = text
         label.backgroundColor = .green
         label.textAlignment = .center
