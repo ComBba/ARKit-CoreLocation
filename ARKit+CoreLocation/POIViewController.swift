@@ -43,7 +43,7 @@ class POIViewController: UIViewController {
     /// Whether to display some debugging data
     /// This currently displays the coordinate of the best location estimate
     /// The initial value is respected
-    let displayDebugging = false
+    let displayDebugging = true
 
     let adjustNorthByTappingSidesOfScreen = false
     let addNodeByTappingScreen = true
@@ -350,8 +350,18 @@ extension POIViewController {
         let comp = Calendar.current.dateComponents([.hour, .minute, .second, .nanosecond], from: Date())
         if let hour = comp.hour, let minute = comp.minute, let second = comp.second, let nanosecond = comp.nanosecond {
             let nodeCount = "\(sceneLocationView.sceneNode?.childNodes.count.description ?? "n/a") ARKit Nodes"
-            infoLabel.text!.append(" \(hour.short):\(minute.short):\(second.short):\(nanosecond.short3) • \(nodeCount)")
+            infoLabel.text!.append(" \(hour.short):\(minute.short):\(second.short):\(nanosecond.short3) • \(nodeCount)\n")
         }
+
+        if let curLocation = sceneLocationView.sceneLocationManager.currentLocation {
+           let curCoordinate = curLocation.coordinate
+            let curLongitude = curCoordinate.longitude
+           let curLatitude = curCoordinate.latitude
+           let curAltitude = curLocation.altitude
+            infoLabel.text!.append(" Longitude: \(curLongitude) , Latitude: \(curLatitude) , Altitude: \(curAltitude)\n")
+        }
+
+        infoLabel.text!.append("\n test by ddengle.com")
     }
 
     func buildNode(latitude: CLLocationDegrees, longitude: CLLocationDegrees,
